@@ -1,0 +1,92 @@
+#include <stdio.h>
+double getPositiveAverage (double myArray[], int numItems)
+{
+    double avg = 0;
+    double sum = 0;
+    int posNums = 0;
+    for (int i = 0; i < numItems; i++)
+    {
+        if(myArray[i] > 0)
+        {
+            sum += myArray[i];
+            posNums += 1;
+        }
+    }
+    avg = sum/posNums;
+    return avg;
+}
+int countRangeValues (double arr[], int count, double value)
+{
+    int num = 0;
+    for (int i = 0; i < count; i++)
+    {
+       if (arr[i] >= value - .5 && arr[i] < value + .5)
+       {
+            num += 1;
+       }
+    }
+    return num; 
+}
+double getMaxAbsolute (double arr[], int count)
+{
+    double highest = 0;
+    double actualHigh = 0;
+    if (arr[0] < 0)
+    {
+        highest = arr[0] * -1;
+    }
+    else
+    {
+        highest = arr[0];
+    }
+    double current = highest;
+    if (count == 1)
+    {
+        return arr[0];
+    }
+    for(int i = 0; i < count; i++)
+    {
+        if(arr[i] < 0)
+        {
+            current = arr[i] * -1;
+        }
+        else
+        {
+             current = arr[i];
+        }
+        if (current >= highest)
+        {
+            highest = current;
+            actualHigh = arr[i];
+        }
+        
+    }
+    return actualHigh;
+}
+int countInverses (int arr[], int count)
+{ 
+    int numInverses = 0;
+    for (int i = 0; i < count; i++)
+    {
+        for (int j = i + 1; j < count; j++)
+        {
+            if (arr[i] + arr[j] == 0)
+            {
+                numInverses += 1;
+            }
+        }
+    }
+    return numInverses;
+
+}
+int getMaxCount (double arr[], int count)
+{
+    int total = 0;
+    if (count == 0)
+    {
+        return total;
+    }
+    double max = getMaxAbsolute(arr, count);
+    int range = countRangeValues(arr, count, max);
+    return range;
+}
